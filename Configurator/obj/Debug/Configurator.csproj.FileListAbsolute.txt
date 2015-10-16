@@ -1,0 +1,13 @@
+D:\Work (My)\Configurator\Configurator\bin\Debug\Configurator.exe.config
+D:\Work (My)\Configurator\Configurator\bin\Debug\Configurator.exe
+D:\Work (My)\Configurator\Configurator\bin\Debug\Configurator.pdb
+D:\Work (My)\Configurator\Configurator\obj\Debug\Configurator.csprojResolveAssemblyReference.cache
+D:\Work (My)\Configurator\Configurator\obj\Debug\MainWindow.baml
+D:\Work (My)\Configurator\Configurator\obj\Debug\MainWindow.g.cs
+D:\Work (My)\Configurator\Configurator\obj\Debug\App.g.cs
+D:\Work (My)\Configurator\Configurator\obj\Debug\Configurator_MarkupCompile.cache
+D:\Work (My)\Configurator\Configurator\obj\Debug\Configurator.g.resources
+D:\Work (My)\Configurator\Configurator\obj\Debug\Configurator.Properties.Resources.resources
+D:\Work (My)\Configurator\Configurator\obj\Debug\Configurator.csproj.GenerateResource.Cache
+D:\Work (My)\Configurator\Configurator\obj\Debug\Configurator.exe
+D:\Work (My)\Configurator\Configurator\obj\Debug\Configurator.pdb

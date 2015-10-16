@@ -1,0 +1,10 @@
+D:\Work (My)\Configurator\ConsoleTest\bin\Debug\ConsoleTest.exe.config
+D:\Work (My)\Configurator\ConsoleTest\bin\Debug\ConsoleTest.exe
+D:\Work (My)\Configurator\ConsoleTest\bin\Debug\ConsoleTest.pdb
+D:\Work (My)\Configurator\ConsoleTest\bin\Debug\Parser.dll
+D:\Work (My)\Configurator\ConsoleTest\bin\Debug\NLog.dll
+D:\Work (My)\Configurator\ConsoleTest\bin\Debug\Parser.pdb
+D:\Work (My)\Configurator\ConsoleTest\bin\Debug\NLog.xml
+D:\Work (My)\Configurator\ConsoleTest\obj\Debug\ConsoleTest.csprojResolveAssemblyReference.cache
+D:\Work (My)\Configurator\ConsoleTest\obj\Debug\ConsoleTest.exe
+D:\Work (My)\Configurator\ConsoleTest\obj\Debug\ConsoleTest.pdb
