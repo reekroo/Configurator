@@ -1,0 +1,22 @@
+﻿<catel:DataWindow x:Class="ConfigEditor.Views.PackageView"
+                  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                  xmlns:catel="http://catel.codeplex.com"
+                  xmlns:dragDrop="clr-namespace:GongSolutions.Wpf.DragDrop;assembly=GongSolutions.Wpf.DragDrop"
+                  Width="400">
+
+    <Grid>
+        <ComboBox HorizontalAlignment="Left" VerticalAlignment="Top" Width="392" Height="30" Margin="0,10,0,0" 
+                  Name="PackageComboBox"
+                  ItemsSource="{Binding Packages}"
+                  DisplayMemberPath="Key"/>
+
+        <ListView SelectionMode="Single" HorizontalAlignment="Left" VerticalAlignment="Top" Width="392" Height="450" Margin="0,45,0,0" 
+                  ItemsSource="{Binding ElementName=PackageComboBox, Path=SelectedItem.Value}"
+                  dragDrop:DragDrop.IsDragSource="True"
+                  dragDrop:DragDrop.IsDropTarget="True"
+                  dragDrop:DragDrop.DropHandler="{Binding}">
+        </ListView>
+    </Grid>
+
+</catel:DataWindow>

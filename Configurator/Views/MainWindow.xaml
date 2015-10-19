@@ -1,0 +1,52 @@
+﻿<catel:Window
+              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+              xmlns:catel="http://catel.codeplex.com"
+              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+              mc:Ignorable="d" x:Class="ConfigEditor.Views.MainWindow"
+              ResizeMode="CanResize" d:DesignHeight="427" MinWidth="778" MinHeight="400">
+
+    <Grid x:Name="LayoutRoot">
+        <Button Content="Open File" HorizontalAlignment="Left" VerticalAlignment="Top" Width="170" Height="33" Margin="0,10,0,0" Command="{Binding OpenFileCommand}"/>
+        <TextBox Text="{Binding Search}" HorizontalAlignment="Stretch" Height="33" TextWrapping="Wrap" VerticalAlignment="Top" Margin="170,10,125,0" >
+            <i:Interaction.Behaviors>
+                <catel:UpdateBindingOnTextChanged UpdateDelay="500" />
+                <catel:KeyPressToCommand Key="Enter" Command="{Binding SearchCommand}" />
+            </i:Interaction.Behaviors>
+        </TextBox>
+        <Button Content="Search" HorizontalAlignment="Right" Margin="0,10,0,0" VerticalAlignment="Top" Width="125" Height="33" Command="{Binding SearchCommand}"/>
+
+        <Button Content="Add" HorizontalAlignment="Left" Margin="0,63,0,0" VerticalAlignment="Top" Width="171" Height="33"  Command="{Binding AddCommand}"/>
+        <Button Content="Edit" HorizontalAlignment="Left" Margin="171,63,0,0" VerticalAlignment="Top" Width="171" Height="33" Command="{Binding EditCommand}"/>
+        <Button Content="Remove" HorizontalAlignment="Left" Margin="342,63,0,0" VerticalAlignment="Top" Width="171" Height="33" Command="{Binding RemoveCommand}"/>
+
+        <Button Content="Formatting Packages" HorizontalAlignment="Right" Margin="0,63,0,0" VerticalAlignment="Top" Width="125" Height="33" Command="{Binding FormatFormsCommand}"/>
+
+        <ListView Margin="0,96,0,0" SelectionMode="Single"
+			ItemsSource="{Binding FormsCollection}"
+			SelectedItem="{Binding SelectedForm}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="190"
+						DisplayMemberBinding="{Binding FormName}"
+						Header="Form Name" />
+                    <GridViewColumn Width="190"
+						DisplayMemberBinding="{Binding PdfName}"
+						Header="pdf Name" />
+                    <GridViewColumn Width="190"
+						DisplayMemberBinding="{Binding PdfFilePath}"
+						Header="pdf Path" />
+                    <GridViewColumn Width="190"
+						DisplayMemberBinding="{Binding Doctype}"
+						Header="Doctype" />
+                </GridView>
+            </ListView.View>
+            <i:Interaction.Behaviors>
+                <catel:KeyPressToCommand Key="Space" Command="{Binding EditCommand}" />
+                <catel:KeyPressToCommand Key="Delete" Command="{Binding RemoveCommand}" />
+            </i:Interaction.Behaviors>
+        </ListView>
+    </Grid>
+
+</catel:Window>

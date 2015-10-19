@@ -1,0 +1,56 @@
+﻿<catel:DataWindow
+                  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                  xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+                  xmlns:catel="http://catel.codeplex.com" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="ConfigEditor.Views.FormView" Width="564.794" Height="289.411">
+
+    <Grid>
+        <Label Content="Form Name" HorizontalAlignment="Left" Margin="1,4,0,0" VerticalAlignment="Top"/>
+        <TextBox Text="{Binding FormName}" HorizontalAlignment="Left" Height="23" Margin="78,7,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180"/>
+
+        <Label Content="PDF Name" HorizontalAlignment="Left" Margin="1,30,0,0" VerticalAlignment="Top"/>
+        <TextBox Text="{Binding PdfName}" HorizontalAlignment="Left" Height="23" Margin="78,33,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180"/>
+
+        <Label Content="Doctype" HorizontalAlignment="Left" Margin="1,56,0,0" VerticalAlignment="Top"/>
+        <TextBox Text="{Binding Doctype}" HorizontalAlignment="Left" Height="23" Margin="78,58,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180"/>
+
+        <Label Content="DataNamePrefix" HorizontalAlignment="Left" Margin="268,4,0,0" VerticalAlignment="Top"/>
+        <TextBox Text="{Binding DataNamePrefix}" HorizontalAlignment="Left" Height="23" Margin="370,7,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180"/>
+
+        <Label Content="MergeID" HorizontalAlignment="Left" Margin="268,30,0,0" VerticalAlignment="Top"/>
+        <TextBox Text="{Binding MergeId}" HorizontalAlignment="Left" Height="23" Margin="370,33,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180"/>
+
+        <Label Content="Attachment" HorizontalAlignment="Left" Margin="268,56,0,0" VerticalAlignment="Top"/>
+        <TextBox Text="{Binding Attachment}" HorizontalAlignment="Left" Height="23" Margin="370,58,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180"/>
+
+        <Label Content="Docdesc" HorizontalAlignment="Left" Margin="268,82,0,0" VerticalAlignment="Top"/>
+        <TextBox Text="{Binding Docdesc}" HorizontalAlignment="Left" Height="23" Margin="370,84,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180"/>
+
+        <Label Content="PDF Path" HorizontalAlignment="Left" Margin="0,107,0,0" VerticalAlignment="Top"/>
+        <TextBox Text="{Binding PdfFilePath}" HorizontalAlignment="Left" Height="23" Margin="77,110,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="472"/>
+
+        <!--<Button Content="Add Pdf Path" Command="{Binding PathToPdfCommand}" Margin="422,84,16,127" Visibility="{Binding ButtonIsVisible}"/>-->
+
+        <Label Content="Packages" HorizontalAlignment="Left" Margin="1,133,0,0" VerticalAlignment="Top"/>
+
+        <ListBox SelectionMode="Single"  HorizontalAlignment="Left" Height="114" Margin="78,136,0,0" VerticalAlignment="Top" Width="230" 
+                 ItemsSource="{Binding Packages, Mode=TwoWay}"  SelectedItem="{Binding SelectedPackage}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseDoubleClick">
+                    <catel:EventToCommand Command="{Binding Edit}" DisableAssociatedObjectOnCannotExecute="False" PassEventArgsToCommand="True"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </ListBox>
+
+        <ListBox SelectionMode="Single"  HorizontalAlignment="Left" Height="114" Margin="319,136,0,0" VerticalAlignment="Top" Width="230" 
+                 ItemsSource="{Binding AllPackages, Mode=TwoWay}" SelectedItem="{Binding SelectedAllPackage}" >
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseDoubleClick">
+                    <catel:EventToCommand Command="{Binding Edit}" DisableAssociatedObjectOnCannotExecute="False" PassEventArgsToCommand="True"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </ListBox>
+    </Grid>
+
+</catel:DataWindow>
