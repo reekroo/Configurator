@@ -6,8 +6,8 @@ namespace Parser.Entities
     {
         public string PdfFilePath { get; set; }
 
-        public IList<string> UsedPackages { get; set; }
+        public IEnumerable<string> UsedPackages { get; set; }
 
-        public IList<string> UnusedPackages { get; set; }
+        public IEnumerable<string> UnusedPackages { get; set; }
     }
 }

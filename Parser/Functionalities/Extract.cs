@@ -23,7 +23,7 @@ namespace Parser.Functionalities
             {
                 result.Add(new PdfElement
                 {
-                    PdfFilePath = node.Attribute("Pdf").Value,
+                    PdfFilePath = node.Attribute("File").Value,
                     PdfName = node.Attribute("Name").Value
                 });
             }

@@ -33,7 +33,7 @@ namespace Parser.Helpers
             
             foreach (var property in properties)
             {
-                var value = ExtractAttributeValueFromNode(property.ToString(), node);
+                var value = ExtractAttributeValueFromNode(property.Name, node);
                 property.SetValue(formElement, value, null);
             }
 
@@ -94,6 +94,16 @@ namespace Parser.Helpers
 
         private static string ExtractAttributeValueFromNode(string attributeName, XElement node)
         {
+            if (attributeName == "FormName")
+            {
+                attributeName = "Name";
+            }
+
+            if (attributeName == "PdfName")
+            {
+                attributeName = "Pdf";
+            }
+
             var n = node.Attribute(attributeName);
             return n != null ? n.Value : null;
         }

@@ -3,12 +3,12 @@
     using Catel.Windows;
     using ViewModels;
 
-    public partial class Form
+    public partial class FormView
     {
-        public Form()
+        public FormView()
             : this(null) { }
 
-        public Form(FormModel viewModel)
+        public FormView(FormViewModel viewModel)
             : base(viewModel)
         {
             InitializeComponent();

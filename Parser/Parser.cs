@@ -36,20 +36,37 @@ namespace Parser
             _document = DocumentHelper.LoadDocument(path);
         }
 
+        //проверка!!!
+
         public IEnumerable<Element> Extract()
         {
             var pdfElements = _extract.ExtractPdfs(ConstPath.Pdfs, _document);
             Logger.Log(LogLevel.Info, "Extracted Pdfs From Config File");
 
-            var formElements = _extract.ExtractForms(ConstPath.Forms, _document) as IEnumerable<Element>;
+            var formElements = _extract.ExtractForms(ConstPath.Forms, _document);
             Logger.Log(LogLevel.Info, "Extracted Forms From Config File");
 
-            var result = formElements.Select(form => new Element
-                                                         {
-                                                             PdfFilePath = pdfElements.Single(pdf => form.PdfName == pdf.PdfName).PdfFilePath, 
-                                                             UsedPackages = (IList<string>)_extract.ExtractUsedPackages(ConstPath.FormsInPackages, _document, form.FormName), 
-                                                             UnusedPackages = (IList<string>)_extract.ExtractUnusedPackages(ConstPath.FormsInPackages, _document, form.FormName)
-                                                         });
+            var result = new List<Element>();
+            foreach (var form in formElements)
+            {
+                var path = pdfElements.Single(pdf => form.PdfName == pdf.PdfName).PdfFilePath;
+                var usedPackages = _extract.ExtractUsedPackages(ConstPath.FormsInPackages, _document, form.FormName);
+                var unusedpackages = _extract.ExtractUnusedPackages(ConstPath.FormsInPackages, _document, form.FormName);
+
+                result.Add(new Element
+                {
+                    PdfFilePath = path,
+                    UsedPackages = usedPackages,
+                    UnusedPackages = unusedpackages
+                });
+            }
+
+            //var result = formElements.Select(form => new Element
+            //                                             {
+            //                                                 PdfFilePath = pdfElements.Single(pdf => form.PdfName == pdf.PdfName).PdfFilePath, 
+            //                                                 UsedPackages = (IList<string>)_extract.ExtractUsedPackages(ConstPath.FormsInPackages, _document, form.FormName), 
+            //                                                 UnusedPackages = (IList<string>)_extract.ExtractUnusedPackages(ConstPath.FormsInPackages, _document, form.FormName)
+            //                                             });
             Logger.Log(LogLevel.Info, "Extracted Packages For Forms From Config File");
 
             Logger.Log(LogLevel.Info, "Extracted Config File");

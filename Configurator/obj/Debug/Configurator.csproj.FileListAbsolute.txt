@@ -1,1 +1,19 @@
 E:\Work\Configurator\output\Debug\Configurator.exe.config
+D:\Work (My)\Configurator\output\Debug\Configurator.exe.config
+D:\Work (My)\Configurator\Configurator\obj\Debug\Configurator.csprojResolveAssemblyReference.cache
+D:\Work (My)\Configurator\Configurator\obj\Debug\Views\FormView.baml
+D:\Work (My)\Configurator\Configurator\obj\Debug\Views\MainWindow.baml
+D:\Work (My)\Configurator\Configurator\obj\Debug\Views\PackageView.baml
+D:\Work (My)\Configurator\Configurator\obj\Debug\App.baml
+D:\Work (My)\Configurator\Configurator\obj\Debug\Views\FormView.g.cs
+D:\Work (My)\Configurator\Configurator\obj\Debug\Views\MainWindow.g.cs
+D:\Work (My)\Configurator\Configurator\obj\Debug\Views\PackageView.g.cs
+D:\Work (My)\Configurator\Configurator\obj\Debug\App.g.cs
+D:\Work (My)\Configurator\Configurator\obj\Debug\Configurator_MarkupCompile.cache
+D:\Work (My)\Configurator\Configurator\obj\Debug\Configurator.g.resources
+D:\Work (My)\Configurator\Configurator\obj\Debug\Configurator.Properties.Resources.resources
+D:\Work (My)\Configurator\Configurator\obj\Debug\Configurator.csproj.GenerateResource.Cache
+D:\Work (My)\Configurator\output\Debug\Configurator.exe
+D:\Work (My)\Configurator\output\Debug\Configurator.pdb
+D:\Work (My)\Configurator\Configurator\obj\Debug\Configurator.exe
+D:\Work (My)\Configurator\Configurator\obj\Debug\Configurator.pdb
