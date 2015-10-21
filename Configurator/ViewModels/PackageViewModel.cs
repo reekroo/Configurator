@@ -1,4 +1,7 @@
-﻿namespace Configurator.ViewModels
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+
+namespace Configurator.ViewModels
 {
     using Catel.MVVM;
     using System.Threading.Tasks;
@@ -9,24 +12,23 @@
         {
         }
 
-        public override string Title { get { return "View model title"; } }
+        //public PackageViewModel()
+        //{
+        //    Packages = ;
+        //}
 
-        // TODO: Register models with the vmpropmodel codesnippet
-        // TODO: Register view model properties with the vmprop or vmpropviewmodeltomodel codesnippets
-        // TODO: Register commands with the vmcommand or vmcommandwithcanexecute codesnippets
+        public override string Title { get { return "View model title"; } }
 
         protected override async Task InitializeAsync()
         {
             await base.InitializeAsync();
-
-            // TODO: subscribe to events here
         }
 
         protected override async Task CloseAsync()
         {
-            // TODO: unsubscribe from events here
-
             await base.CloseAsync();
         }
+
+        public Dictionary<string, ObservableCollection<string>> Packages { get; set; }
     }
 }

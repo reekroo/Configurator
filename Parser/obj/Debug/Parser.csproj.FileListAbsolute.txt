@@ -5,3 +5,4 @@ D:\Work (My)\Configurator\Parser\bin\Debug\NLog.dll
 D:\Work (My)\Configurator\Parser\bin\Debug\NLog.xml
 D:\Work (My)\Configurator\Parser\obj\Debug\Parser.dll
 D:\Work (My)\Configurator\Parser\obj\Debug\Parser.pdb
+D:\Work (My)\Configurator\Parser\bin\Debug\NLog.config

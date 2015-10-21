@@ -39,10 +39,10 @@ namespace Parser
         public IEnumerable<Element> Extract()
         {
             var pdfElements = _extract.ExtractPdfs(ConstPath.Pdfs, _document);
-            Logger.Log(LogLevel.Info, "Extracted Pdfs From Config File");
+            Logger.Log(LogLevel.Trace, "Extracted Pdfs From Config File");
 
             var formElements = _extract.ExtractForms(ConstPath.Forms, _document);
-            Logger.Log(LogLevel.Info, "Extracted Forms From Config File");
+            Logger.Log(LogLevel.Trace, "Extracted Forms From Config File");
 
             var result = formElements.Select(form => new Element(form)
                                                          {
@@ -50,7 +50,7 @@ namespace Parser
                                                              UsedPackages = _extract.ExtractUsedPackages(ConstPath.FormsInPackages, _document, form.FormName),
                                                              UnusedPackages = _extract.ExtractUnusedPackages(ConstPath.FormsInPackages, _document, form.FormName)
                                                          });
-            Logger.Log(LogLevel.Info, "Extracted Packages For Forms From Config File");
+            Logger.Log(LogLevel.Trace, "Extracted Packages For Forms From Config File");
 
             Logger.Log(LogLevel.Info, "Extracted Config File");
             return result;

@@ -17,3 +17,4 @@ D:\Work (My)\Configurator\output\Debug\Configurator.exe
 D:\Work (My)\Configurator\output\Debug\Configurator.pdb
 D:\Work (My)\Configurator\Configurator\obj\Debug\Configurator.exe
 D:\Work (My)\Configurator\Configurator\obj\Debug\Configurator.pdb
+D:\Work (My)\Configurator\output\Debug\NLog.config

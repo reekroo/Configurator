@@ -26,5 +26,22 @@ namespace Configurator.Services
                 UnusedPackages = new ObservableCollection<string>(element.UnusedPackages)
             }));
         }
+        
+        public static Element FormToElement(this Form form)
+        {
+            return new Element
+            {
+                FormName = form.FormName,
+                PdfName = form.PdfName,
+                Doctype = form.Doctype,
+                DataNamePrefix = form.DataNamePrefix,
+                Docdesc = form.Docdesc,
+                MergeId = form.MergeId,
+                Attachment = form.Attachment,
+                PdfFilePath = form.PdfFilePath,
+                UsedPackages = new ObservableCollection<string>(form.UsedPackages),
+                UnusedPackages = new ObservableCollection<string>(form.UnusedPackages)
+            };
+        }
     }
 }

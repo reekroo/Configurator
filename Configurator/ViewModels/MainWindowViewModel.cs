@@ -2,10 +2,9 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
-
-using Catel.MVVM;
 using System.Threading.Tasks;
 
+using Catel.MVVM;
 using Catel.Data;
 using Catel.IoC;
 using Catel.Services;
@@ -42,6 +41,13 @@ namespace Configurator.ViewModels
 
         public string Search { get; set; }
 
+        public Form SelectedForm
+        {
+            get { return GetValue<Form>(SelectedFormProperty); }
+            set { SetValue(SelectedFormProperty, value); }
+        }
+        public static readonly PropertyData SelectedFormProperty = RegisterProperty("SelectedForm", typeof(Form));
+        
         public ObservableCollection<Form> FormsCollection
         {
             get { return GetValue<ObservableCollection<Form>>(FormsCollectionProperty); }
@@ -98,7 +104,11 @@ namespace Configurator.ViewModels
                     }
                     catch (Exception ex)
                     {
-                        _messageService.ShowAsync(ex.Message, "Error", MessageButton.OK, MessageImage.Warning);
+                        _messageService.ShowAsync(ex.Message, "Error", MessageButton.OK, MessageImage.Error);
+                    }
+                    finally
+                    {
+                        _pleaseWaitService.Hide();
                     }
                 });
             }
@@ -116,12 +126,160 @@ namespace Configurator.ViewModels
                     }
                     catch (Exception ex)
                     {
-                        _messageService.ShowAsync(ex.Message, "Error", MessageButton.OK, MessageImage.Warning);
+                        _messageService.ShowAsync(ex.Message, "Error", MessageButton.OK, MessageImage.Error);
                     }
                 });
             }
         }
 
+        private Command _addCommand;
+        public Command AddCommand
+        {
+            get
+            {
+                return _addCommand ?? (_addCommand = new Command(() =>
+                {
+                    var viewModel = new FormViewModel(Packages);
+
+                    _uiVisualizerService.ShowDialog(viewModel, (sender, e) =>
+                    {
+                        if (!(e.Result ?? false))
+                        {
+                            return;
+                        }
+
+                        _pleaseWaitService.Show("Waiting...");
+
+                        var succeed = _parser.Add(viewModel.FormObject.FormToElement());
+
+                        if (succeed)
+                        {
+                            FormsCollection.Add(viewModel.FormObject);
+                            _pleaseWaitService.UpdateStatus("...succeed");
+                        }
+                        else
+                        {
+                            _pleaseWaitService.UpdateStatus("...fail");
+                        }
+                        Thread.Sleep(1000);
+
+                        _pleaseWaitService.Hide();
+                    });
+                },
+                () => string.IsNullOrEmpty(ConfigFilePath) == false));
+            }
+        }
+        
+        private Command _editCommand;
+        public Command EditCommand
+        {
+            get
+            {
+                return _editCommand ?? (_editCommand = new Command(() =>
+                {
+                    var copyForm = SelectedForm.Clone() as Form;
+                    var viewModel = new FormViewModel(SelectedForm);
+
+                    _uiVisualizerService.ShowDialog(viewModel, (sender, e) =>
+                    {
+                        if (!(e.Result ?? false))
+                        {
+                            return;
+                        }
+                        _pleaseWaitService.Show("Waiting...");
+
+                        var succeed = _parser.Edit(copyForm.FormToElement(), viewModel.FormObject.FormToElement());
+
+                        if (succeed)
+                        {
+                            _pleaseWaitService.UpdateStatus("...succeed");
+                        }
+                        else
+                        {
+                            _pleaseWaitService.UpdateStatus("...fail");
+                        }
+                        Thread.Sleep(1000);
+
+                        _pleaseWaitService.Hide();
+                    });
+                },
+                () => SelectedForm != null));
+            }
+        }
+        
+        private Command _removeCommand;
+        public Command RemoveCommand
+        {
+            get
+            {
+                return _removeCommand ?? (_removeCommand = new Command(async () =>
+                {
+                    if (await _messageService.ShowAsync("Are you realy want to remove it?", "Attention!", MessageButton.YesNo, MessageImage.Warning) != MessageResult.Yes)
+                    {
+                        return;
+                    }
+
+                    _pleaseWaitService.Show("Waiting...");
+
+                    var succeed = _parser.Remove(SelectedForm.FormToElement());
+
+                    FormsCollection.Remove(SelectedForm);
+
+                    if (succeed)
+                    {
+                        FormsCollection.Remove(SelectedForm);
+                        _pleaseWaitService.UpdateStatus("...succeed");
+                    }
+                    else
+                    {
+                        _pleaseWaitService.UpdateStatus("...fail");
+                    }
+                    Thread.Sleep(1000);
+
+                    _pleaseWaitService.Hide();
+                },
+                () => SelectedForm != null));
+            }
+        }
+
+        //private Command _formatFormsCommand;
+        //public Command FormatFormsCommand
+        //{
+        //    get
+        //    {
+        //        return _formatFormsCommand ?? (_formatFormsCommand = new Command(() =>
+        //        {
+        //            try
+        //            {
+        //                var viewModel = new PackageViewModel(Packages);
+
+        //                _uiVisualizerService.ShowDialog(viewModel, (sender, e) =>
+        //                {
+        //                    if (!(e.Result ?? false))
+        //                    {
+        //                        return;
+        //                    }
+
+        //                    FormatElementsInPackages(viewModel.Packages);
+        //                });
+        //            }
+        //            catch (Exception ex)
+        //            {
+        //                _messageService.ShowAsync(ex.Message, "Error", MessageButton.OK, MessageImage.Error);
+        //            }
+        //        },
+        //        () => string.IsNullOrEmpty(this.ConfigFilePath) == false));
+        //    }
+        //}
+
+
+        //private void FormatElementsInPackages()
+        //{
+        //    foreach (var package in packages.Keys)
+        //    {
+        //        this._pars.EditFormsForPackagesInConfigFile(package, new List<string>(packages[package]));
+        //    }
+        //}
 
         private ObservableCollection<Form> ExecuteSearchedElements(string search)
         {
@@ -137,6 +295,5 @@ namespace Configurator.ViewModels
             var results = new ObservableCollection<Form>(q);
             return results;
         }
-
     }
 }

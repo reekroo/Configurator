@@ -35,7 +35,7 @@
         <Label Content="Packages" HorizontalAlignment="Left" Margin="1,133,0,0" VerticalAlignment="Top"/>
 
         <ListBox SelectionMode="Single"  HorizontalAlignment="Left" Height="114" Margin="78,136,0,0" VerticalAlignment="Top" Width="230" 
-                 ItemsSource="{Binding Packages, Mode=TwoWay}"  SelectedItem="{Binding SelectedPackage}">
+                 ItemsSource="{Binding UsedPackages, Mode=TwoWay}"  SelectedItem="{Binding SelectedUsedPackage}">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseDoubleClick">
                     <catel:EventToCommand Command="{Binding Edit}" DisableAssociatedObjectOnCannotExecute="False" PassEventArgsToCommand="True"/>
@@ -44,7 +44,7 @@
         </ListBox>
 
         <ListBox SelectionMode="Single"  HorizontalAlignment="Left" Height="114" Margin="319,136,0,0" VerticalAlignment="Top" Width="230" 
-                 ItemsSource="{Binding AllPackages, Mode=TwoWay}" SelectedItem="{Binding SelectedAllPackage}" >
+                 ItemsSource="{Binding UnusedPackages, Mode=TwoWay}" SelectedItem="{Binding SelectedUnusedPackage}" >
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseDoubleClick">
                     <catel:EventToCommand Command="{Binding Edit}" DisableAssociatedObjectOnCannotExecute="False" PassEventArgsToCommand="True"/>
