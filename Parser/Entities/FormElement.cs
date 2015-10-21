@@ -6,7 +6,7 @@
         {
         }
 
-        public FormElement(Element element)
+        public FormElement(FormElement element)
         {
             FormName = element.FormName;
             PdfName = element.PdfName;

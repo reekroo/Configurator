@@ -1,18 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading;
 
 using Catel.MVVM;
 using System.Threading.Tasks;
 
-using Catel.Collections;
+using Catel.Data;
 using Catel.IoC;
 using Catel.Services;
 
 using Configurator.Models;
+using Configurator.Services;
 
-using Parser.Entities;
 
 namespace Configurator.ViewModels
 {
@@ -40,8 +40,15 @@ namespace Configurator.ViewModels
 
         private string ConfigFilePath { get; set; }
 
-        public ObservableCollection<Form> FormsCollection { get; set; }
+        public string Search { get; set; }
 
+        public ObservableCollection<Form> FormsCollection
+        {
+            get { return GetValue<ObservableCollection<Form>>(FormsCollectionProperty); }
+            set { SetValue(FormsCollectionProperty, value); }
+        }
+        public static readonly PropertyData FormsCollectionProperty = RegisterProperty("FormsCollection", typeof(ObservableCollection<Form>));
+        
         public ObservableCollection<Form> DoublicateCollection = new ObservableCollection<Form>();
         
         
@@ -79,8 +86,7 @@ namespace Configurator.ViewModels
                         _parser = new Parser.Parser(ConfigFilePath);
 
                         Packages = new ObservableCollection<string>(_parser.ExtractPackages());
-                        var f = _parser.Extract();
-                        
+                        FormsCollection = _parser.Extract().ElementsToForms();
                         DoublicateCollection = FormsCollection;
 
                         //Backuper.BackupConfig(this.ConfigFilePath);
@@ -98,22 +104,39 @@ namespace Configurator.ViewModels
             }
         }
 
-        //public Command SearchCommand
-        //{
-        //    get
-        //    {
-        //        return new Command(() =>
-        //        {
-        //            try
-        //            {
-        //                this.FormsCollection = this.ExecuteSearchedElements(this.Search);
-        //            }
-        //            catch (Exception ex)
-        //            {
-        //                _messageService.Show(ex.Message, "Error", MessageButton.YesNo, MessageImage.Warning);
-        //            }
-        //        });
-        //    }
-        //}
+        public Command SearchCommand
+        {
+            get
+            {
+                return new Command(() =>
+                {
+                    try
+                    {
+                        FormsCollection = ExecuteSearchedElements(Search);
+                    }
+                    catch (Exception ex)
+                    {
+                        _messageService.ShowAsync(ex.Message, "Error", MessageButton.OK, MessageImage.Warning);
+                    }
+                });
+            }
+        }
+
+
+        private ObservableCollection<Form> ExecuteSearchedElements(string search)
+        {
+            if (string.IsNullOrEmpty(search))
+            {
+                return DoublicateCollection;
+            }
+
+            search = search.ToUpper().Trim();
+            var q = DoublicateCollection.Where(form => (string.IsNullOrEmpty(form.FormName) == false && form.FormName.ToUpper().Contains(search)) ||
+                                                        (string.IsNullOrEmpty(form.PdfName) == false && form.PdfName.ToUpper().Contains(search)) ||
+                                                        (string.IsNullOrEmpty(form.Doctype) == false && form.Doctype.ToUpper().Contains(search)));
+            var results = new ObservableCollection<Form>(q);
+            return results;
+        }
+
     }
 }

@@ -51,15 +51,22 @@ namespace Parser.Functionalities
         {
             var nodes = document.XPathSelectElements(xPath);
 
+            //var result = new List<string>();
+
             foreach (var atttribute in nodes.Where(node => node.HasAttributes).Attributes())
             {
+                //result.Add(atttribute.Value);
                 yield return atttribute.Value;
             }
+
+            //return result;
         }
 
         public IEnumerable<string> ExtractUsedPackages(string xPath, XElement document, string formName)
         {
             var nodes = document.XPathSelectElements(xPath);
+
+            //var result = new List<string>();
 
             foreach (var node in nodes.Where(node => node.Name == "Form" && node.Attribute("Name") != null && node.Attribute("Name").Value == formName))
             {
@@ -67,17 +74,19 @@ namespace Parser.Functionalities
 
                 if (package.Attribute("Name") != null)
                 {
-                    yield return package.Value;
+                    //result.Add(package.Attribute("Name").Value);
+                    yield return package.Attribute("Name").Value;
                 }
             }
+            //return result;
         }
 
         public IEnumerable<string> ExtractUnusedPackages(string xPath, XElement document, string formName)
         {
             var used = ExtractUsedPackages(xPath, document, formName);
-            var packages = ExtractPackages(xPath, document);
+            var packages = ExtractPackages(ConstPath.Packages, document);
 
-            var unused = packages.Intersect(used);
+            var unused = packages.Except(used);
 
             return unused;
         }

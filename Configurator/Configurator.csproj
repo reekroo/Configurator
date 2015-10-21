@@ -69,6 +69,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Models\Form.cs" />
+    <Compile Include="Services\ConvertorService.cs" />
     <Compile Include="ViewModels\FormViewModel.cs" />
     <Compile Include="ViewModels\PackageViewModel.cs" />
     <Compile Include="Views\PackageView.xaml.cs">
