@@ -27,7 +27,7 @@ namespace Parser.Functionalities
 
                         var newNode = new XElement("Form");
                         newNode.SetAttributeValue("Name", element.FormName);
-                        child.AddAfterSelf(newNode);
+                        child.Add(newNode);
                     }
                 }
             }
@@ -39,7 +39,7 @@ namespace Parser.Functionalities
 
             foreach (var node in nodes)
             {
-                node.AddAfterSelf(AttributeHelper.AddNodeToForm(element));
+                node.Add(AttributeHelper.AddNodeToForm(element));
             }
         }
 
@@ -53,7 +53,7 @@ namespace Parser.Functionalities
                 newNode.SetAttributeValue("Name", element.PdfName);
                 newNode.SetAttributeValue("File", element.PdfFilePath);
 
-                node.AddAfterSelf(newNode);
+                node.Add(newNode);
             }
         }
 
@@ -79,7 +79,7 @@ namespace Parser.Functionalities
                     newNode.SetAttributeValue("Name", formName);
                     //node.Parent.AddAfterSelf(newNode);
 
-                    child.AddAfterSelf(newNode);
+                    child.Add(newNode);
                 }
             }
         }

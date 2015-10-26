@@ -25,6 +25,7 @@ namespace Configurator.ViewModels
         {
             FormObject = form ?? new Form
                                      {
+                                         UsedPackages = new ObservableCollection<string>(),
                                          UnusedPackages = new ObservableCollection<string>(packges)
                                      };
         }

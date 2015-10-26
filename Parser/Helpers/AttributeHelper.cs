@@ -17,7 +17,7 @@ namespace Parser.Helpers
             {
                 var value = property.GetValue(formElement, null);
 
-                if (value != null && string.IsNullOrEmpty(value.ToString()))
+                if (value != null && !string.IsNullOrEmpty(value.ToString()))
                 {
                     AddAttributeInNode(property.Name, value.ToString(), node);
                 }
@@ -68,6 +68,16 @@ namespace Parser.Helpers
         {
             if (node.Attribute(attributeName) == null)
             {
+                if (attributeName == "FormName")
+                {
+                    attributeName = "Name";
+                }
+
+                if (attributeName == "PdfName")
+                {
+                    attributeName = "Pdf";
+                }
+
                 node.SetAttributeValue(attributeName, attributeValue);
             }
         }

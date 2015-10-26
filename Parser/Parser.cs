@@ -103,6 +103,7 @@ namespace Parser
 
                 Logger.Log(LogLevel.Info, "Added Information To Config File");
 
+                _document.SaveDocument();
                 return true;
             }
             catch (Exception ex)
