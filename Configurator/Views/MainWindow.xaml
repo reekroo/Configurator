@@ -8,8 +8,10 @@
               ResizeMode="CanResize" d:DesignHeight="427" MinWidth="778" MinHeight="400">
 
     <Grid x:Name="LayoutRoot">
-        <Button Content="Open File" HorizontalAlignment="Left" VerticalAlignment="Top" Width="170" Height="33" Margin="0,10,0,0" Command="{Binding OpenFileCommand}"/>
-        <TextBox Text="{Binding Search}" HorizontalAlignment="Stretch" Height="33" TextWrapping="Wrap" VerticalAlignment="Top" Margin="170,10,125,0" >
+        <Button Content="Open File" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Height="33" Margin="0,10,0,0" Command="{Binding OpenFileCommand}"/>
+        <Button Content="Save File" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Height="33" Margin="120,10,0,0" Command="{Binding SaveFileCommand}"/>
+
+        <TextBox Text="{Binding Search}" HorizontalAlignment="Stretch" Height="33" TextWrapping="Wrap" VerticalAlignment="Top" Margin="240,10,125,0" >
             <i:Interaction.Behaviors>
                 <catel:UpdateBindingOnTextChanged UpdateDelay="500" />
                 <catel:KeyPressToCommand Key="Enter" Command="{Binding SearchCommand}" />

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
@@ -111,6 +112,19 @@ namespace Configurator.ViewModels
                         _pleaseWaitService.Hide();
                     }
                 });
+            }
+        }
+
+        private Command _saveFileCommand;
+        public Command SaveFileCommand
+        {
+            get
+            {
+                return _saveFileCommand ?? (_saveFileCommand = new Command(() =>
+                {
+
+                },
+                () => string.IsNullOrEmpty(ConfigFilePath) == false));
             }
         }
 
@@ -242,44 +256,44 @@ namespace Configurator.ViewModels
             }
         }
 
-        //private Command _formatFormsCommand;
-        //public Command FormatFormsCommand
-        //{
-        //    get
-        //    {
-        //        return _formatFormsCommand ?? (_formatFormsCommand = new Command(() =>
-        //        {
-        //            try
-        //            {
-        //                var viewModel = new PackageViewModel(Packages);
+        private Command _formatFormsCommand;
+        public Command FormatFormsCommand
+        {
+            get
+            {
+                return _formatFormsCommand ?? (_formatFormsCommand = new Command(() =>
+                {
+                    try
+                    {
+                        var viewModel = new PackageViewModel(Packages, ConfigFilePath);
 
-        //                _uiVisualizerService.ShowDialog(viewModel, (sender, e) =>
-        //                {
-        //                    if (!(e.Result ?? false))
-        //                    {
-        //                        return;
-        //                    }
+                        _uiVisualizerService.ShowDialog(viewModel, (sender, e) =>
+                        {
+                            if (!(e.Result ?? false))
+                            {
+                                return;
+                            }
 
-        //                    FormatElementsInPackages(viewModel.Packages);
-        //                });
-        //            }
-        //            catch (Exception ex)
-        //            {
-        //                _messageService.ShowAsync(ex.Message, "Error", MessageButton.OK, MessageImage.Error);
-        //            }
-        //        },
-        //        () => string.IsNullOrEmpty(this.ConfigFilePath) == false));
-        //    }
-        //}
+                            FormatElementsInPackages(viewModel.Packages);
+                        });
+                    }
+                    catch (Exception ex)
+                    {
+                        _messageService.ShowAsync(ex.Message, "Error", MessageButton.OK, MessageImage.Error);
+                    }
+                },
+                () => string.IsNullOrEmpty(ConfigFilePath) == false));
+            }
+        }
 
 
-        //private void FormatElementsInPackages()
-        //{
-        //    foreach (var package in packages.Keys)
-        //    {
-        //        this._pars.EditFormsForPackagesInConfigFile(package, new List<string>(packages[package]));
-        //    }
-        //}
+        private void FormatElementsInPackages(Dictionary<string, ObservableCollection<string>> packages)
+        {
+            foreach (var package in packages.Keys)
+            {
+                _parser.EditPackageForms(package, packages[package]);
+            }
+        }
 
         private ObservableCollection<Form> ExecuteSearchedElements(string search)
         {

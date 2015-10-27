@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
+
 namespace Configurator.ViewModels
 {
     using Catel.MVVM;
@@ -8,15 +9,18 @@ namespace Configurator.ViewModels
 
     public class PackageViewModel : ViewModelBase
     {
-        public PackageViewModel()
+        public PackageViewModel(ObservableCollection<string> packages, string path)
         {
+            var parser = new Parser.Parser(path);
+
+            Packages = new Dictionary<string, ObservableCollection<string>>();
+
+            foreach (var package in packages)
+            {
+                Packages.Add(package, new ObservableCollection<string>(parser.ExtractPackageForms(package)));
+            }
         }
-
-        //public PackageViewModel()
-        //{
-        //    Packages = ;
-        //}
-
+        
         public override string Title { get { return "View model title"; } }
 
         protected override async Task InitializeAsync()

@@ -75,18 +75,13 @@ namespace Parser
             }
         }
 
-        //public List<FormsInPackageElement> ExtractFormsForPackagesFromConfigFile(List<string> allpackages)
-        //{
-        //    var result = allpackages.Select(package => new FormsInPackageElement
-        //    {
-        //        Package = package,
-        //        Forms = Extract.ExtractFormsFromPackage(ConstPath.Packages, _root, package)
-        //    }).ToList();
+        public IEnumerable<string> ExtractPackageForms(string package)
+        {
+            var result = _extract.ExtractFormsFromPackage(ConstPath.Packages, _document, package);
+            Logger.Log(LogLevel.Info, "Extracted Forms For Packages From Config File");
 
-        //    Logger.Log(LogLevel.Info, "Extracted Forms For Packages From Config File");
-
-        //    return result;
-        //}
+            return result;
+        }
 
         public bool Add(Element param)
         {
@@ -164,13 +159,14 @@ namespace Parser
             }
         }
 
-        public bool EditFormsForPackagesInConfigFile(string package, List<string> newFormName)
+        public bool EditPackageForms(string package, IEnumerable<string> newFormName)
         {
             try
             {
-                _replace.ReplaceAllFormNamesInPackage(ConstPath.FormsInPackages, _document, package, newFormName);
-
+                _replace.ReplacePackageForms(ConstPath.FormsInPackages, _document, package, newFormName);
                 Logger.Log(LogLevel.Info, "Edited Forms For Packages In Config File");
+
+                _document.SaveDocument();
                 return true;
             }
             catch (Exception ex)

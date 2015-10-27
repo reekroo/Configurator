@@ -80,15 +80,17 @@ namespace Parser.Functionalities
             }
         }
         
-        public void ReplaceAllFormNamesInPackage(string xPath, XElement document, string package, IEnumerable<string> newFormName)
+        public void ReplacePackageForms(string xPath, XElement document, string package, IEnumerable<string> newFormName)
         {
             var nodes = document.XPathSelectElements(xPath);
             var names = newFormName.ToList();
 
-            foreach (var node in nodes.Where(node => node.Name == "Form" && node.Parent.Parent.Attribute("Name").Value == package &&
-                                             node.HasAttributes && node.Attribute("Name") != null && node.Attribute("Name").Value == names.First()))
+            foreach (var node in nodes.Where(node => node.Name == "Form" && node.Parent.Parent.Attribute("Name").Value == package))
             {
-                node.Attribute("Name").Value = names.First();
+                if (node.HasAttributes && node.Attribute("Name") != null && node.Attribute("Name").Value != names.First())
+                {
+                    node.Attribute("Name").Value = names.First();
+                }
                 names.Remove(names.First());
             }
         }

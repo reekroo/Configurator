@@ -101,7 +101,7 @@ namespace Parser.Functionalities
                 {
                     foreach (var ch in child.Elements().Where(ch => ch.Name == "Form" && ch.Attribute("Name") != null))
                     {
-                        yield return ch.Value;
+                        yield return ch.Attribute("Name").Value;
                     }
                 }
             }
