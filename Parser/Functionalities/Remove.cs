@@ -37,7 +37,7 @@ namespace Parser.Functionalities
         {
             var nodes = document.XPathSelectElements(xPath);
 
-            foreach (var node in nodes.Where(node => node.Name == "Form" && node.Attribute("Name") != null && node.Attribute("Name").Value != param.FormName))
+            foreach (var node in nodes.Where(node => node.Name == "Form" && node.Attribute("Name") != null && node.Attribute("Name").Value == param.FormName))
             {
                 node.Remove();
             }

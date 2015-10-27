@@ -12,7 +12,7 @@
             PdfName = element.PdfName;
             Doctype = element.Doctype;
             DataNamePrefix = element.DataNamePrefix;
-            Docdesc = element.Doctype;
+            Docdesc = element.Docdesc;
             MergeId = element.MergeId;
             Attachment = element.Attachment;
         }

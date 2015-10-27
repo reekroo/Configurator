@@ -33,7 +33,7 @@ namespace Parser.Functionalities
                     continue;
                 }
 
-                if (node.HasAttributes || node.Attribute("Name").Value != previousParam.FormName || node.Attribute("Pdf").Value != previousParam.PdfFilePath)
+                if (!node.HasAttributes || node.Attribute("Name").Value != previousParam.FormName || node.Attribute("Pdf").Value != previousParam.PdfName)
                 {
                     continue;
                 }

@@ -128,6 +128,8 @@ namespace Parser
                 Logger.Log(LogLevel.Trace, "Removed Information From All Packages In Config File");
 
                 Logger.Log(LogLevel.Info, "Removed Information From Config File");
+
+                _document.SaveDocument();
                 return true;
             }
             catch (Exception ex)
@@ -151,6 +153,8 @@ namespace Parser
                 Logger.Log(LogLevel.Trace, "Edited Information In Packages In Config File");
 
                 Logger.Log(LogLevel.Info, "Edited Information In Config File");
+
+                _document.SaveDocument();
                 return true;
             }
             catch (Exception ex)

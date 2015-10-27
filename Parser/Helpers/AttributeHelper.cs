@@ -42,7 +42,7 @@ namespace Parser.Helpers
 
         public static void AttributeInNode(string attribute, string oldValue, string newValue, XElement node)
         {
-            //string.IsNullOrEmpty
+            //string.IsNullOrEmpty <- use else need to delete attributes from nodes
             if (oldValue == newValue)
             {
                 return;
@@ -68,17 +68,7 @@ namespace Parser.Helpers
         {
             if (node.Attribute(attributeName) == null)
             {
-                if (attributeName == "FormName")
-                {
-                    attributeName = "Name";
-                }
-
-                if (attributeName == "PdfName")
-                {
-                    attributeName = "Pdf";
-                }
-
-                node.SetAttributeValue(attributeName, attributeValue);
+                node.SetAttributeValue(attributeName.NameConvertor(), attributeValue);
             }
         }
 
@@ -104,18 +94,20 @@ namespace Parser.Helpers
 
         private static string ExtractAttributeValueFromNode(string attributeName, XElement node)
         {
-            if (attributeName == "FormName")
-            {
-                attributeName = "Name";
-            }
-
-            if (attributeName == "PdfName")
-            {
-                attributeName = "Pdf";
-            }
-
-            var n = node.Attribute(attributeName);
+            var n = node.Attribute(attributeName.NameConvertor());
             return n != null ? n.Value : null;
+        }
+
+        private static string NameConvertor(this string name)
+        {
+            switch (name)
+            {
+                case "FormName": name = "Name"; break;
+                case "PdfName": name = "Pdf"; break;
+                case "MergeId": name = "MergeID"; break;  
+            }
+
+            return name;
         }
     }
 }
