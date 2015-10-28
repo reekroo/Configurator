@@ -1,0 +1,5 @@
+D:\Work (My)\Configurator\Documenter\bin\Debug\Documenter.dll
+D:\Work (My)\Configurator\Documenter\bin\Debug\Documenter.pdb
+D:\Work (My)\Configurator\Documenter\obj\Debug\Documenter.csprojResolveAssemblyReference.cache
+D:\Work (My)\Configurator\Documenter\obj\Debug\Documenter.dll
+D:\Work (My)\Configurator\Documenter\obj\Debug\Documenter.pdb

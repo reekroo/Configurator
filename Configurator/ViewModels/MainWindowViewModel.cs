@@ -24,6 +24,7 @@ namespace Configurator.ViewModels
         private readonly IDependencyResolver _dependencyResolver;
 
         private Parser.Parser _parser;
+        private Documenter.Documenter _documenter;
 
         public MainWindowViewModel(IUIVisualizerService uiVisualizerService, IPleaseWaitService pleaseWaitService, 
                                    IMessageService messageService, IDependencyResolver dependencyResolver)
@@ -66,6 +67,16 @@ namespace Configurator.ViewModels
 
         protected override async Task CloseAsync()
         {
+            if (_documenter != null)
+            {
+                if (await _messageService.ShowAsync("Do you realy not want to save your changes?", "Attention!", MessageButton.YesNo, MessageImage.Warning) != MessageResult.Yes)
+                {
+                    return;
+                }
+
+                _documenter.SaveDocument();
+            }
+
             await base.CloseAsync();
         }
 
@@ -90,7 +101,8 @@ namespace Configurator.ViewModels
 
                         ConfigFilePath = openFileService.FileName;
 
-                        _parser = new Parser.Parser(ConfigFilePath);
+                        _documenter = new Documenter.Documenter(ConfigFilePath);
+                        _parser = new Parser.Parser(_documenter.OpenDocument());
 
                         Packages = new ObservableCollection<string>(_parser.ExtractPackages());
                         FormsCollection = _parser.Extract().ElementsToForms();
@@ -122,7 +134,7 @@ namespace Configurator.ViewModels
             {
                 return _saveFileCommand ?? (_saveFileCommand = new Command(() =>
                 {
-
+                    _documenter.SaveDocument();
                 },
                 () => string.IsNullOrEmpty(ConfigFilePath) == false));
             }
@@ -164,20 +176,23 @@ namespace Configurator.ViewModels
 
                         _pleaseWaitService.Show("Waiting...");
 
-                        var succeed = _parser.Add(viewModel.FormObject.FormToElement());
-
-                        if (succeed)
+                        try
                         {
+                            _documenter.Document = _parser.Add(viewModel.FormObject.FormToElement());
+
                             FormsCollection.Add(viewModel.FormObject);
                             _pleaseWaitService.UpdateStatus("...succeed");
                         }
-                        else
+                        catch (Exception)
                         {
                             _pleaseWaitService.UpdateStatus("...fail");
                         }
-                        Thread.Sleep(1000);
+                        finally
+                        {
+                            Thread.Sleep(1000);
+                            _pleaseWaitService.Hide();
+                        }
 
-                        _pleaseWaitService.Hide();
                     });
                 },
                 () => string.IsNullOrEmpty(ConfigFilePath) == false));
@@ -202,19 +217,21 @@ namespace Configurator.ViewModels
                         }
                         _pleaseWaitService.Show("Waiting...");
 
-                        var succeed = _parser.Edit(copyForm.FormToElement(), viewModel.FormObject.FormToElement());
-
-                        if (succeed)
+                        try
                         {
+                            _documenter.Document = _parser.Edit(copyForm.FormToElement(), viewModel.FormObject.FormToElement());
                             _pleaseWaitService.UpdateStatus("...succeed");
                         }
-                        else
+                        catch (Exception)
                         {
+                            viewModel.FormObject = copyForm;
                             _pleaseWaitService.UpdateStatus("...fail");
                         }
-                        Thread.Sleep(1000);
-
-                        _pleaseWaitService.Hide();
+                        finally
+                        {
+                            Thread.Sleep(1000);
+                            _pleaseWaitService.Hide();
+                        }
                     });
                 },
                 () => SelectedForm != null));
@@ -228,29 +245,28 @@ namespace Configurator.ViewModels
             {
                 return _removeCommand ?? (_removeCommand = new Command(async () =>
                 {
-                    if (await _messageService.ShowAsync("Are you realy want to remove it?", "Attention!", MessageButton.YesNo, MessageImage.Warning) != MessageResult.Yes)
+                    if (await _messageService.ShowAsync("Do you realy want to remove it?", "Attention!", MessageButton.YesNo, MessageImage.Warning) != MessageResult.Yes)
                     {
                         return;
                     }
 
                     _pleaseWaitService.Show("Waiting...");
 
-                    var succeed = _parser.Remove(SelectedForm.FormToElement());
-
-                    FormsCollection.Remove(SelectedForm);
-
-                    if (succeed)
+                    try
                     {
+                        _documenter.Document = _parser.Remove(SelectedForm.FormToElement());
                         FormsCollection.Remove(SelectedForm);
                         _pleaseWaitService.UpdateStatus("...succeed");
                     }
-                    else
+                    catch (Exception)
                     {
                         _pleaseWaitService.UpdateStatus("...fail");
                     }
-                    Thread.Sleep(1000);
-
-                    _pleaseWaitService.Hide();
+                    finally
+                    {
+                        Thread.Sleep(1000);
+                        _pleaseWaitService.Hide();
+                    }
                 },
                 () => SelectedForm != null));
             }
@@ -265,7 +281,7 @@ namespace Configurator.ViewModels
                 {
                     try
                     {
-                        var viewModel = new PackageViewModel(Packages, ConfigFilePath);
+                        var viewModel = new PackageViewModel(Packages, _documenter.Document);
 
                         _uiVisualizerService.ShowDialog(viewModel, (sender, e) =>
                         {
@@ -291,7 +307,7 @@ namespace Configurator.ViewModels
         {
             foreach (var package in packages.Keys)
             {
-                _parser.EditPackageForms(package, packages[package]);
+                _documenter.Document = _parser.EditPackageForms(package, packages[package]);
             }
         }
 

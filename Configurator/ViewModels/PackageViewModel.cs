@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-
+using System.Xml.Linq;
 
 namespace Configurator.ViewModels
 {
@@ -9,9 +9,9 @@ namespace Configurator.ViewModels
 
     public class PackageViewModel : ViewModelBase
     {
-        public PackageViewModel(ObservableCollection<string> packages, string path)
+        public PackageViewModel(ObservableCollection<string> packages, XElement document)
         {
-            var parser = new Parser.Parser(path);
+            var parser = new Parser.Parser(document);
 
             Packages = new Dictionary<string, ObservableCollection<string>>();
 

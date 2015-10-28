@@ -26,14 +26,19 @@ namespace Parser
 
         private readonly Replace _replace = new Replace();
 
-        public Parser(string path)
-        {
-            if (string.IsNullOrEmpty(path))
-            {
-                //return something
-            }
+        //public Parser(string path)
+        //{
+        //    if (string.IsNullOrEmpty(path))
+        //    {
+        //        //return something
+        //    }
 
-            _document = DocumentHelper.LoadDocument(path);
+        //    _document = DocumentHelper.LoadDocument(path);
+        //}
+
+        public Parser(XElement doc)
+        {
+            _document = doc;
         }
 
         public IEnumerable<Element> Extract()
@@ -83,8 +88,9 @@ namespace Parser
             return result;
         }
 
-        public bool Add(Element param)
+        public XElement Add(Element param)
         {
+            var doc = _document;
             try
             {
                 _add.AddToPackages(ConstPath.Packages, _document, param);
@@ -98,19 +104,22 @@ namespace Parser
 
                 Logger.Log(LogLevel.Info, "Added Information To Config File");
 
-                _document.SaveDocument();
-                return true;
+                //_document.SaveDocument();
+                //return true;
+                return _document;
             }
             catch (Exception ex)
             {
                 Logger.Log(LogLevel.Error, ex.Message);
 
-                return false;
+                //return false;
+                return doc;
             }
         }
 
-        public bool Remove(Element param)
+        public XElement Remove(Element param)
         {
+            var doc = _document;
             try
             {
                 _remove.RemoveFromPdfs(ConstPath.Pdfs, _document, param);
@@ -124,18 +133,21 @@ namespace Parser
 
                 Logger.Log(LogLevel.Info, "Removed Information From Config File");
 
-                _document.SaveDocument();
-                return true;
+                //_document.SaveDocument();
+                //return true;
+                return _document;
             }
             catch (Exception ex)
             {
                 Logger.Log(LogLevel.Error, ex.Message);
-                return false;
+                //return false;
+                return doc;
             }
         }
 
-        public bool Edit(Element oldParam, Element newParam)
+        public XElement Edit(Element oldParam, Element newParam)
         {
+            var doc = _document;
             try
             {
                 _replace.ReplaceInPdfs(ConstPath.Pdfs, _document, oldParam, newParam);
@@ -149,30 +161,35 @@ namespace Parser
 
                 Logger.Log(LogLevel.Info, "Edited Information In Config File");
 
-                _document.SaveDocument();
-                return true;
+                //_document.SaveDocument();
+                //return true;
+                return _document;
             }
             catch (Exception ex)
             {
                 Logger.Log(LogLevel.Error, ex.Message);
-                return false;
+                //return false;
+                return doc;
             }
         }
 
-        public bool EditPackageForms(string package, IEnumerable<string> newFormName)
+        public XElement EditPackageForms(string package, IEnumerable<string> newFormName)
         {
+            var doc = _document;
             try
             {
                 _replace.ReplacePackageForms(ConstPath.FormsInPackages, _document, package, newFormName);
                 Logger.Log(LogLevel.Info, "Edited Forms For Packages In Config File");
 
-                _document.SaveDocument();
-                return true;
+                //_document.SaveDocument();
+                //return true;
+                return _document;
             }
             catch (Exception ex)
             {
                 Logger.Log(LogLevel.Error, ex.Message);
-                return false;
+                //return false;
+                return doc;
             }
         }
     }

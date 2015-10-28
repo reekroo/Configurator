@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Xml.Linq;
 
 using Parser.Entities;
 
@@ -8,10 +9,10 @@ namespace Parser.Interfaces
     {
         IEnumerable<Element> Extract();
 
-        bool Add(Element param);
+        XElement Add(Element param);
 
-        bool Remove(Element param);
+        XElement Remove(Element param);
 
-        bool Edit(Element oldParam, Element newParam);
+        XElement Edit(Element oldParam, Element newParam);
     }
 }

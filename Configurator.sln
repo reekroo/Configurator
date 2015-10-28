@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parser", "Parser\Parser.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Configurator", "Configurator\Configurator.csproj", "{BE1DC329-AFC6-40D2-82DC-30E2752DECDB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Documenter", "Documenter\Documenter.csproj", "{5049194B-A818-4441-B86D-3FE503447E68}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{BE1DC329-AFC6-40D2-82DC-30E2752DECDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE1DC329-AFC6-40D2-82DC-30E2752DECDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE1DC329-AFC6-40D2-82DC-30E2752DECDB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5049194B-A818-4441-B86D-3FE503447E68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5049194B-A818-4441-B86D-3FE503447E68}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5049194B-A818-4441-B86D-3FE503447E68}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5049194B-A818-4441-B86D-3FE503447E68}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

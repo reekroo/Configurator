@@ -131,6 +131,10 @@
     <Folder Include="Services\Interfaces\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Documenter\Documenter.csproj">
+      <Project>{5049194b-a818-4441-b86d-3fe503447e68}</Project>
+      <Name>Documenter</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Parser\Parser.csproj">
       <Project>{92601822-55c6-4912-a82a-aa6d9fc28870}</Project>
       <Name>Parser</Name>
