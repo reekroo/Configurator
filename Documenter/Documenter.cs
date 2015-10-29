@@ -1,5 +1,7 @@
 ﻿using System.Xml.Linq;
 
+using Documenter.Interfaces;
+
 namespace Documenter
 {
     public class Documenter : IDocumenter

@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CossFormsConfiguration>
+  <RemarksMaxCharactersPerLine>100</RemarksMaxCharactersPerLine>
+  <RemarksMaxLinesPerPage>40</RemarksMaxLinesPerPage>
+  <Input>
+    <Packages>
+      <Package Name="T100_Standard_Life">
+        <InputForms>
+          <Form Name="InputScreens" />
+        </InputForms>
+      </Package>
+    </Packages>
+  </Input>
+  <Output>
+    <Packages>
+      <Package Name="T100_Standard_Life">
+        <OutputForms>
+          <Remark Name="Remarks" />
+          <Form Name="333" />
+        </OutputForms>
+        <Entities>
+          <Entity Default="1" Name="Client" />
+        </Entities>
+      </Package>
+      <Package Name="T100_Standard_Life_1">
+        <OutputForms>
+          <Remark Name="Remarks" />
+          <Form Name="222" />
+        </OutputForms>
+        <Entities>
+          <Entity Default="1" Name="Client" />
+        </Entities>
+      </Package>
+      <Package Name="T100_Standard_Life_2">
+        <OutputForms>
+          <Remark Name="Remarks" />
+          <Form Name="111" />
+          <Form Name="222" />
+          <Form Name="333" />
+          <Form Name="444" />
+        </OutputForms>
+        <Entities>
+          <Entity Default="1" Name="Client" />
+        </Entities>
+      </Package>
+    </Packages>
+  </Output>
+  <Remarks>
+    <Remark Docdesc="All Remarks" Doctype="REMARKS" MergeWithID="BASEAPP" Name="Remarks" Pdf="REMARKS">
+      <DataNamePrefixes>
+        <DataNamePrefix Name="REM_MAIN_" />
+      </DataNamePrefixes>
+    </Remark>
+  </Remarks>
+  <Forms>
+    <Form Name="InputScreens">
+      <Screens>
+        <Screen Caption="Proposed Insured" DataNamePrefix="PI" IsVisible="1" Name="PIInsured" ScreenName="Insured" />
+        <Screen Caption="Proposed Insured Cont" DataNamePrefix="PI" IsVisible="1" Name="PIInsuredCont" ScreenName="InsuredCont" />
+        <Screen Caption="Other Insured" DataNamePrefix="OI1_" Name="OI1Insured" ScreenName="Insured" />
+        <Screen Caption="Other Insured Cont" DataNamePrefix="OI1_" Name="OI1InsuredCont" ScreenName="InsuredCont" />
+        <Screen Caption="Owner 1" DataNamePrefix="OWN1_" Name="Owner1" ScreenName="Owner" />
+        <Screen Caption="Beneficiary Information" IsVisible="1" Name="Beneficiary" ScreenName="Beneficiary" />
+        <Screen Caption="Medical Questions" IsVisible="1" Name="MedQuestions" ScreenName="MedQuestions" />
+        <Screen Caption="Coverage Information" IsVisible="1" Name="Coverage" />
+        <Screen Caption="Child Rider" Name="ChildRider" />
+        <Screen Caption="Validate and Lock Data" IsVisible="1" Name="eSign" />
+        <Screen Caption="Signature Method" Name="SignatureMethod" />
+        <Screen Caption="Print and Wet Sign" Name="PrintWetSign" />
+        <Screen Caption="Replacement" IsVisible="1" Name="ExistingInsurance" />
+      </Screens>
+    </Form>
+    <Form Name="222" Pdf="222" />
+    <Form Name="333" Pdf="333" />
+    <Form Name="111" Pdf="111" />
+    <Form Name="444" Pdf="444" Doctype="444" />
+  </Forms>
+  <Pdfs>
+    <Pdf File="PDF\Remarks.pdf" Name="REMARKS" />
+    <Pdf Name="222" File="22222" />
+    <Pdf Name="333" File="33333" />
+    <Pdf Name="111" File="111" />
+    <Pdf Name="444" File="4444" />
+  </Pdfs>
+</CossFormsConfiguration>

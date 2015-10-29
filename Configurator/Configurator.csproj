@@ -131,6 +131,10 @@
     <Folder Include="Services\Interfaces\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Backuper\Backuper.csproj">
+      <Project>{6fef1340-420f-4af3-b8ee-8abbf7e979df}</Project>
+      <Name>Backuper</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Documenter\Documenter.csproj">
       <Project>{5049194b-a818-4441-b86d-3fe503447e68}</Project>
       <Name>Documenter</Name>

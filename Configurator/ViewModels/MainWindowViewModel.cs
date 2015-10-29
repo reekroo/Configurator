@@ -108,8 +108,8 @@ namespace Configurator.ViewModels
                         FormsCollection = _parser.Extract().ElementsToForms();
                         DoublicateCollection = FormsCollection;
 
-                        //Backuper.BackupConfig(this.ConfigFilePath);
-
+                        new Backuper.Backuper(ConfigFilePath).Backup();
+                        
                         _pleaseWaitService.UpdateStatus("...succeed");
                         Thread.Sleep(1000);
 
@@ -134,7 +134,14 @@ namespace Configurator.ViewModels
             {
                 return _saveFileCommand ?? (_saveFileCommand = new Command(() =>
                 {
-                    _documenter.SaveDocument();
+                    try
+                    {
+                        _documenter.SaveDocument();
+                    }
+                    catch (Exception ex)
+                    {
+                        _messageService.ShowAsync(ex.Message, "Error", MessageButton.OK, MessageImage.Error);
+                    }
                 },
                 () => string.IsNullOrEmpty(ConfigFilePath) == false));
             }

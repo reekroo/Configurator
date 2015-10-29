@@ -1,6 +1,6 @@
 ﻿using System.Xml.Linq;
 
-namespace Documenter
+namespace Documenter.Interfaces
 {
     public interface IDocumenter
     {
