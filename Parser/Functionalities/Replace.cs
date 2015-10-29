@@ -6,6 +6,7 @@ using System.Xml.XPath;
 using Parser.Entities;
 using Parser.Helpers;
 using Parser.Interfaces;
+using Parser.Resources;
 
 namespace Parser.Functionalities
 {

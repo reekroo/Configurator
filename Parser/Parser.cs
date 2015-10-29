@@ -7,8 +7,8 @@ using NLog;
 
 using Parser.Entities;
 using Parser.Functionalities;
-using Parser.Helpers;
 using Parser.Interfaces;
+using Parser.Resources;
 
 namespace Parser
 {
