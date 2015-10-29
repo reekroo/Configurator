@@ -18,3 +18,21 @@ D:\Work (My)\Configurator\output\Debug\Configurator.pdb
 D:\Work (My)\Configurator\Configurator\obj\Debug\Configurator.exe
 D:\Work (My)\Configurator\Configurator\obj\Debug\Configurator.pdb
 D:\Work (My)\Configurator\output\Debug\NLog.config
+E:\Work\Configurator\Configurator\obj\Debug\Configurator.exe
+E:\Work\Configurator\Configurator\obj\Debug\Configurator.pdb
+E:\Work\Configurator\output\Debug\NLog.config
+E:\Work\Configurator\output\Debug\Configurator.exe
+E:\Work\Configurator\output\Debug\Configurator.pdb
+E:\Work\Configurator\Configurator\obj\Debug\Configurator.csprojResolveAssemblyReference.cache
+E:\Work\Configurator\Configurator\obj\Debug\Views\FormView.baml
+E:\Work\Configurator\Configurator\obj\Debug\Views\MainWindow.baml
+E:\Work\Configurator\Configurator\obj\Debug\Views\PackageView.baml
+E:\Work\Configurator\Configurator\obj\Debug\App.baml
+E:\Work\Configurator\Configurator\obj\Debug\Views\FormView.g.cs
+E:\Work\Configurator\Configurator\obj\Debug\Views\MainWindow.g.cs
+E:\Work\Configurator\Configurator\obj\Debug\Views\PackageView.g.cs
+E:\Work\Configurator\Configurator\obj\Debug\App.g.cs
+E:\Work\Configurator\Configurator\obj\Debug\Configurator_MarkupCompile.cache
+E:\Work\Configurator\Configurator\obj\Debug\Configurator.g.resources
+E:\Work\Configurator\Configurator\obj\Debug\Configurator.Properties.Resources.resources
+E:\Work\Configurator\Configurator\obj\Debug\Configurator.csproj.GenerateResource.Cache

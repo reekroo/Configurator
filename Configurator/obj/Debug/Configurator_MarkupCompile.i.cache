@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-D:\Work (My)\Configurator\Configurator\obj\Debug\
+E:\Work\Configurator\Configurator\obj\Debug\
 Configurator
 none
 false
 DEBUG;TRACE
-D:\Work (My)\Configurator\Configurator\App.xaml
+E:\Work\Configurator\Configurator\App.xaml
 3-2008493547
-
-16428142366
-201346225620
+1-1201527617
+16-1124467482
+20-909376810
 Views\FormView.xaml;Views\MainWindow.xaml;Views\PackageView.xaml;
 
 False

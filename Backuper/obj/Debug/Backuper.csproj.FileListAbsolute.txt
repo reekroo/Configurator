@@ -3,3 +3,8 @@ D:\Work (My)\Configurator\Backuper\bin\Debug\Backuper.pdb
 D:\Work (My)\Configurator\Backuper\obj\Debug\Backuper.csprojResolveAssemblyReference.cache
 D:\Work (My)\Configurator\Backuper\obj\Debug\Backuper.dll
 D:\Work (My)\Configurator\Backuper\obj\Debug\Backuper.pdb
+E:\Work\Configurator\Backuper\bin\Debug\Backuper.dll
+E:\Work\Configurator\Backuper\bin\Debug\Backuper.pdb
+E:\Work\Configurator\Backuper\obj\Debug\Backuper.csprojResolveAssemblyReference.cache
+E:\Work\Configurator\Backuper\obj\Debug\Backuper.dll
+E:\Work\Configurator\Backuper\obj\Debug\Backuper.pdb
