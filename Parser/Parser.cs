@@ -16,7 +16,7 @@ namespace Parser
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-        private XElement _document;
+        private readonly XElement _document;
 
         private readonly Add _add = new Add();
 
@@ -25,16 +25,6 @@ namespace Parser
         private readonly Remove _remove = new Remove();
 
         private readonly Replace _replace = new Replace();
-
-        //public Parser(string path)
-        //{
-        //    if (string.IsNullOrEmpty(path))
-        //    {
-        //        //return something
-        //    }
-
-        //    _document = DocumentHelper.LoadDocument(path);
-        //}
 
         public Parser(XElement doc)
         {
@@ -50,11 +40,11 @@ namespace Parser
             Logger.Log(LogLevel.Trace, "Extracted Forms From Config File");
 
             var result = formElements.Select(form => new Element(form)
-                                                         {
-                                                             PdfFilePath = pdfElements.Single(pdf => form.PdfName == pdf.PdfName).PdfFilePath,
-                                                             UsedPackages = _extract.ExtractUsedPackages(ConstPath.FormsInPackages, _document, form.FormName),
-                                                             UnusedPackages = _extract.ExtractUnusedPackages(ConstPath.FormsInPackages, _document, form.FormName)
-                                                         });
+            {
+                PdfFilePath = pdfElements.Single(pdf => form.PdfName == pdf.PdfName).PdfFilePath,
+                UsedPackages = _extract.ExtractUsedPackages(ConstPath.FormsInPackages, _document, form.FormName),
+                UnusedPackages = _extract.ExtractUnusedPackages(ConstPath.FormsInPackages, _document, form.FormName)
+            });
             Logger.Log(LogLevel.Trace, "Extracted Packages For Forms From Config File");
 
             Logger.Log(LogLevel.Info, "Extracted Config File");
@@ -82,6 +72,11 @@ namespace Parser
 
         public IEnumerable<string> ExtractPackageForms(string package)
         {
+            if (string.IsNullOrEmpty(package))
+            {
+                return Enumerable.Empty<string>();
+            }
+
             var result = _extract.ExtractFormsFromPackage(ConstPath.Packages, _document, package);
             Logger.Log(LogLevel.Info, "Extracted Forms For Packages From Config File");
 
@@ -90,6 +85,11 @@ namespace Parser
 
         public XElement Add(Element param)
         {
+            if (param == null)
+            {
+                return null;
+            }
+
             var doc = _document;
             try
             {
@@ -104,21 +104,23 @@ namespace Parser
 
                 Logger.Log(LogLevel.Info, "Added Information To Config File");
 
-                //_document.SaveDocument();
-                //return true;
                 return _document;
             }
             catch (Exception ex)
             {
                 Logger.Log(LogLevel.Error, ex.Message);
 
-                //return false;
                 return doc;
             }
         }
 
         public XElement Remove(Element param)
         {
+            if (param == null)
+            {
+                return null;
+            }
+
             var doc = _document;
             try
             {
@@ -133,20 +135,22 @@ namespace Parser
 
                 Logger.Log(LogLevel.Info, "Removed Information From Config File");
 
-                //_document.SaveDocument();
-                //return true;
                 return _document;
             }
             catch (Exception ex)
             {
                 Logger.Log(LogLevel.Error, ex.Message);
-                //return false;
                 return doc;
             }
         }
 
         public XElement Edit(Element oldParam, Element newParam)
         {
+            if (oldParam == null || newParam == null)
+            {
+                return null;
+            }
+
             var doc = _document;
             try
             {
@@ -155,40 +159,39 @@ namespace Parser
 
                 _replace.ReplaceInForms(ConstPath.Forms, _document, oldParam, newParam);
                 Logger.Log(LogLevel.Trace, "Edited Information In Forms In Config File");
-                 
+
                 _replace.ReplaceInPackages(ConstPath.FormsInPackages, _document, oldParam, newParam);
                 Logger.Log(LogLevel.Trace, "Edited Information In Packages In Config File");
 
                 Logger.Log(LogLevel.Info, "Edited Information In Config File");
 
-                //_document.SaveDocument();
-                //return true;
                 return _document;
             }
             catch (Exception ex)
             {
                 Logger.Log(LogLevel.Error, ex.Message);
-                //return false;
                 return doc;
             }
         }
 
         public XElement EditPackageForms(string package, IEnumerable<string> newFormName)
         {
+            if (string.IsNullOrEmpty(package) || newFormName == null)
+            {
+                return null;
+            }
+
             var doc = _document;
             try
             {
                 _replace.ReplacePackageForms(ConstPath.FormsInPackages, _document, package, newFormName);
                 Logger.Log(LogLevel.Info, "Edited Forms For Packages In Config File");
 
-                //_document.SaveDocument();
-                //return true;
                 return _document;
             }
             catch (Exception ex)
             {
                 Logger.Log(LogLevel.Error, ex.Message);
-                //return false;
                 return doc;
             }
         }
