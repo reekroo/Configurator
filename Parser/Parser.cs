@@ -176,7 +176,7 @@ namespace Parser
 
         public XElement EditPackageForms(string package, IEnumerable<string> newFormName)
         {
-            if (string.IsNullOrEmpty(package) || newFormName == null)
+            if (string.IsNullOrEmpty(package) || newFormName == null || newFormName.Count() <= 0)
             {
                 return null;
             }
