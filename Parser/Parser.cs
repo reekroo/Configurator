@@ -41,9 +41,9 @@ namespace Parser
 
             var result = formElements.Select(form => new Element(form)
             {
-                PdfFilePath = pdfElements.Single(pdf => form.PdfName == pdf.PdfName).PdfFilePath,
-                UsedPackages = _extract.ExtractUsedPackages(ConstPath.FormsInPackages, _document, form.FormName),
-                UnusedPackages = _extract.ExtractUnusedPackages(ConstPath.FormsInPackages, _document, form.FormName)
+                PdfFilePath = pdfElements.Any(pdf => form.PdfName == pdf.PdfName) ? pdfElements.First(pdf => form.PdfName == pdf.PdfName).PdfFilePath : string.Empty,
+                UsedPackages = _extract.ExtractUsedPackages(ConstPath.FormsInPackages, _document, form.FormName) ?? Enumerable.Empty<string>(),
+                UnusedPackages = _extract.ExtractUnusedPackages(ConstPath.FormsInPackages, _document, form.FormName) ?? Enumerable.Empty<string>()
             });
             Logger.Log(LogLevel.Trace, "Extracted Packages For Forms From Config File");
 
