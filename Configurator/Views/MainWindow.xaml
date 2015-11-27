@@ -46,7 +46,7 @@
                 </GridView>
             </ListView.View>
             <i:Interaction.Behaviors>
-                <catel:KeyPressToCommand Key="Space" Command="{Binding EditCommand}" />
+                <catel:KeyPressToCommand Key="Enter" Command="{Binding EditCommand}" />
                 <catel:KeyPressToCommand Key="Delete" Command="{Binding RemoveCommand}" />
             </i:Interaction.Behaviors>
         </ListView>

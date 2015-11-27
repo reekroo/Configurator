@@ -30,7 +30,7 @@ namespace Configurator.ViewModels
                                      };
         }
         
-        public override string Title { get { return "View model title"; } }
+        public override string Title { get { return "Form"; } }
 
 
         protected override async Task InitializeAsync()
